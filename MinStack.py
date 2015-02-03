@@ -1,42 +1,25 @@
-class Node:
-    def __init__(self, x, n):
-        self.x = x
-        self.next = n
-
 class MinStack:
     # @param x, an integer
+    def __init__(self):
+        self.stack1 = []
+        self.stack2 = []
     # @return an integer
-    self.min = None
-    self.top = None
     def push(self, x):
-        if not self.top:
-            t = Node(x, None)
-            self.top = t
-            self.min = t
-            return
-        t = self.top
-        while t:
-            if x < t.x:
-                a = Node()
+        self.stack1.append(x)
+        if len(self.stack2) == 0 or x <= self.stack2[-1]:
+            self.stack2.append(x)
 
     # @return nothing
     def pop(self):
-        if not self.top:
-            return
-        t = self.min
-        while t:
-            if t.x == self.top.x:
-                t.x = t.next.x
-                t.next = t.next.next
-                break
-            t = t.next
-        self.top = self.top.next
-        return
+        top = self.stack1[-1]
+        self.stack1.pop()
+        if top == self.stack2[-1]:
+            self.stack2.pop()
 
     # @return an integer
     def top(self):
-        return self.top.x
+        return self.stack1[-1]
 
     # @return an integer
     def getMin(self):
-        return self.min.x
+        return self.stack2[-1]
