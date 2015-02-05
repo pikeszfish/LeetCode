@@ -1,20 +1,23 @@
 class Solution:
     # @return a string
     def countAndSay(self, n):
-        s = '1'
-        # a = []
+        if n == 1:
+            return '1'
+        t = '1'
         while n > 1:
-            a = []
-            for i in xrange(0, 10):
-                a.append(0)
-            for i in s:
-                a[int(i)] += 1
-            t = ''
-            for i in xrange(9, -1, -1):
-                if a[i] > 0:
-                    t += str(a[i]) + str(i)
-            s = t
+            result = ''
             n -= 1
-        return t
+            s = t[0]
+            k = 1
+            for i in range(1, len(t)):
+                if t[i] == s:
+                    k += 1
+                else:
+                    result = result + str(k) + str(s)
+                    s = t[i]
+                    k = 1
+            result += str(k) + str(s)
+            t = result
+        return result
 b = Solution()
-print b.countAndSay(4)
+print b.countAndSay(5)
